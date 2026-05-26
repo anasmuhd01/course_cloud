@@ -1,0 +1,42 @@
+to create superuser 
+------------------
+
+is_superuser,is_staff,is_active 
+compleate acces over admin_panel
+User.objects.create_superuser()
+
+to create super user : py manage.py createsuperuser
+
+
+models.py =>
+    class Product(models.Model)
+        title
+
+
+admin.py =>
+    from shop.models import Product
+    from django.contrib import admin
+
+
+    admin.site.register(Product)
+
+
+
+Django Signals =>
+
+they are comonly used for 
+running logic automatically after saving /deleting models
+creating related objects automatically
+logging/auditing 
+sendign emails/notification 
+cahce invalidation
+
+a signal consists of 
+sender -> the object emitting the signal
+signal -> the event 
+receiver -> function that handles the event
+
+
+Django Model Admin :
+
+Model admin in django 
