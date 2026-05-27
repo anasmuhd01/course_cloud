@@ -5,3 +5,7 @@ from django.views import View
 class SigninView(View):
     def get(self,req):
         return render(req,'studentsignup.html')
+
+class SignupView(View):
+    def get(self,req):
+        return render(req,'signup.html')
