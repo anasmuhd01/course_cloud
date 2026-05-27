@@ -1,6 +1,6 @@
 from django.contrib import admin
 from instrctor.models import User,InstructorProfile,Category,Course,Module,Lesson
-from django.contrib.admin import ModelAdmin
+from django.contrib.admin import ModelAdmin,TabularInline
 # Register your models here.
 
 admin.site.register(User)
@@ -28,12 +28,21 @@ class CourseModelAdmin(ModelAdmin):
 
 admin.site.register(Course,CourseModelAdmin)
 
+class LessonInline(TabularInline):
+    model = Lesson
+    extra = 1
+    exclude = ('order_number',)
+
 class ModuleModelAdmin(ModelAdmin):
     exclude = ('order_number',)
+    inlines = [LessonInline]
+
 
 admin.site.register(Module,ModuleModelAdmin)
 
-class LessonModelAdmin(ModelAdmin):
-    exclude = ('order_number',)
+# class LessonModelAdmin(ModelAdmin):
+#     exclude = ('order_number',)
 
-admin.site.register(Lesson,LessonModelAdmin)
+# hiding this will remove lesson from sidebar instead show on the module section by using 'TabluarInline'
+# admin.site.register(Lesson)
+

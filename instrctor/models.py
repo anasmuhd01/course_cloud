@@ -75,6 +75,7 @@ class Lesson(models.Model):
     def __str__(self):
         return f"{self.order_number}.{self.title}"
     
+    # look at this max order taking method
     def save(self,*args,**kwargs):
         max_order = Lesson.objects.filter(module=self.module).aggregate(max = Max('order_number')).get('max') or 0
         self.order_number =max_order+ 1
