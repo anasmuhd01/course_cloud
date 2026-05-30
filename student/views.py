@@ -4,42 +4,36 @@ from django.views.generic import TemplateView,FormView,CreateView
 from student.forms import *
 from django.urls import reverse_lazy
 from django.contrib.auth import login,authenticate
-
-# Create your views here.
-
-# the same view can be done using templateview
-# class SigninView(View):
-#     def get(self,req):
-#         return render(req,'studentsignup.html')
-
-# class SigninView(TemplateView):
-#     template_name =  'studentsignin.html'
-
-# class SignupView(View):
-#     def get(self,req):
-#         return render(req,'signup.html')
-
-# using TemplateView
+from django.http import HttpResponse
+from django.contrib import messages
 
 
-
-# class SignupView(TemplateView):
-#     template_name = 'signup.html'
-#     form_class = StudentCreationForm
-
+# django generic views
 class SignupView(CreateView):
     template_name = 'signup.html'
     form_class = StudentCreationForm
     success_url = reverse_lazy('signin')
+    # messages.warning('username already exists')
 
 
 
-class SigninView(View):
-    def get(self,req):
-        form = SigninForm()
+class SigninView(FormView):
+    form_class = SigninForm
+    template_name = 'studentsignin.html'
 
-        return render(req,'studentsignin.html')
+        
     def post(self,req):
-        form_data = SigninForm(req.POST)
-        username = req.POST.get('username')
-        print(username)
+        form_data = SigninForm(data=req.POST)
+
+        if form_data.is_valid():
+            # the same can be used like
+            # uname = form_data.cleaned_data['username']
+            uname = form_data.cleaned_data.get('username')
+            pswd = form_data.cleaned_data.get('password') 
+            user = authenticate(req,username = uname, password = pswd)
+            if user.role == 'Student':
+                login(req,user)
+                return render(req,'homepage.html')
+            else:
+                messages.warning(req,'Invalid username/password')
+                return redirect('signin')
