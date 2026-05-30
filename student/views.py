@@ -3,7 +3,7 @@ from django.views import View
 from django.views.generic import TemplateView,FormView,CreateView
 from student.forms import *
 from django.urls import reverse_lazy
-from django.contrib.auth import login,authenticate
+from django.contrib.auth import login,authenticate,logout
 from django.http import HttpResponse
 from django.contrib import messages
 
@@ -18,11 +18,17 @@ class SignupView(CreateView):
     #     return redirect('signin')
 
 
+
+class CCHomeView(View):
+    def get(self,req):
+        return render(req,'homepage.html')
+
+
 class SigninView(FormView):
     form_class = SigninForm
     template_name = 'studentsignin.html'
 
-        
+    
     def post(self,req):
         form_data = SigninForm(data=req.POST)
 
@@ -35,7 +41,17 @@ class SigninView(FormView):
             if user:
                 if user.role == 'Student':
                     login(req,user)
-                    return render(req,'homepage.html')
+                    return redirect('cchome')
+                if user.role == 'Instructor':
+                    login(req,user)
+                    return redirect('admin:index')
+
             else:
                 messages.warning(req,'Invalid username/password')
                 return redirect('signin')
+        
+
+class LogoutView(View):
+    def get(self,req):
+        logout(req)
+        return redirect('signin')

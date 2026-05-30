@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-2*eue66tv!9(yami)2r%(%tg8fh_)bfl&%9+&t&7@8590#uhv8
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -121,3 +121,8 @@ STATIC_URL = 'static/'
 
 # custom model 
 AUTH_USER_MODEL = 'instrctor.User'
+
+# for using NGORK tunnelling for port forwarding
+CSRF_TRUSTED_ORIGINS = [
+    "https://*.ngrok-free.dev",
+]
