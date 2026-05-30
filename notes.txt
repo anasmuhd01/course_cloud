@@ -39,4 +39,25 @@ receiver -> function that handles the event
 
 Django Model Admin :
 
-Model admin in django 
+
+
+Django generic views: =>
+--------------------------
+In Django, generic views are pre-built views that handle common web app patterns 
+like displaying lists, showing details, creating objects, updating records, and deleting records. 
+They reduce boilerplate code and speed up development.
+
+There are two main types:
+----------------------------
+Function-based generic views (older style)
+Class-based generic views (CBVs) — most commonly used today
+
+View	        Purpose
+-----------------------------------------
+ListView	    Display a list of objects
+DetailView	    Show details of one object
+CreateView	    Create a new object
+UpdateView	    Edit an existing object
+DeleteView	    Delete an object
+TemplateView	Render a template only
+-----------------------------------------
