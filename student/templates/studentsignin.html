@@ -24,29 +24,25 @@
         <h2 class="text-5xl font-semibold tracking-tight text-white sm:text-7xl">Sign In</h2>
         {% if messages %}
         {% for msg in messages %}
-        <span class="pt-4 font text-amber-500">{{msg}}</span>
+        <span class="pt-6   font text-amber-500">{{msg}}</span>
         {% endfor %}
         {% endif %}
         <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
             <form action="#" method="POST" class="space-y-6">
                 {% csrf_token %}
-                <div>
-                    <label for="" class="block text-sm/6 font-medium text-gray-100">Username</label>
-                    <div class="mt-2">
-                        <input id="text" type="text" name="username"
+                <div class="">
+
+                    <div class="mt-2 ">
+                        <input id="text" type="text" name="username" placeholder="Enter Username"
                             class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6" />
                     </div>
-                </div>
 
-                <div>
-                    <div class="flex items-center justify-between">
-                        <label for="password" class="block text-sm/6 font-medium text-gray-100">Password</label>
-                        <div class="text-sm">
-                            <a href="#" class="font-semibold text-indigo-400 hover:text-indigo-300">Forgot password?</a>
-                        </div>
-                    </div>
+
+
+
                     <div class="mt-2">
-                        <input id="password" type="password" name="password" required autocomplete="current-password"
+                        <input placeholder="Enter Password" id="password" type="password" name="password" required
+                            autocomplete="current-password"
                             class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6" />
                     </div>
                 </div>

@@ -13,8 +13,9 @@ class SignupView(CreateView):
     template_name = 'signup.html'
     form_class = StudentCreationForm
     success_url = reverse_lazy('signin')
-    # messages.warning('username already exists')
-
+    # def form_invalid(self, form):
+    #     messages.warning(self.request,"Invalid Username/password")
+    #     return redirect('signin')
 
 
 class SigninView(FormView):
@@ -31,9 +32,10 @@ class SigninView(FormView):
             uname = form_data.cleaned_data.get('username')
             pswd = form_data.cleaned_data.get('password') 
             user = authenticate(req,username = uname, password = pswd)
-            if user.role == 'Student':
-                login(req,user)
-                return render(req,'homepage.html')
+            if user:
+                if user.role == 'Student':
+                    login(req,user)
+                    return render(req,'homepage.html')
             else:
                 messages.warning(req,'Invalid username/password')
                 return redirect('signin')
