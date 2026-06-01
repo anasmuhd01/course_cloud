@@ -114,11 +114,33 @@
             </div>
         </el-disclosure>
     </nav>
-    {% block base %}
+    <div style="min-height: 70vh;">
+        {% block base %}
 
 
-    {% endblock base %}
 
+        {% endblock base %}
+    </div>
+    <div class="w-full  p-4 bg-gray-800 text-white">
+        <div class="grid grid-cols-2">
+            <div>
+                <h4>
+                    <i class="fa-regular fa-cloud " style="color: rgb(99, 230, 190);"></i>
+                    course_cloud
+                </h4>
+                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eos delectus illum esse autem sunt tenetur
+                    sit, excepturi dolores rem impedit minus facilis repudiandae dolore, ab ipsum dolor cupiditate modi
+                    nulla?
+                </p>
+            </div>
+            <div class="p-2">
+                <h4>feedback</h4>
+                <textarea name="" id="" class="w-full bg-white border rounded my-2"></textarea>
+                <button class="bg-green-700 text-white my-2 p-2 rounded">Send</button>
+            </div>
+        </div>
+        <h6 class="text-center font-bold">CourseCloud 2026 &copy; All rights reserved</h6>
+    </div>
 </body>
 
 </html>

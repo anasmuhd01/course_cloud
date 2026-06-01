@@ -1,6 +1,65 @@
 {% extends 'base.html' %}
 {% block base %}
 
-<h1>{{request.user}}</h1>
+<!-- <h1>{{request.user}}</h1> -->
+
+<div class="w-full">
+    <div class="bg-gray-800 grid grid-cols-1 md:grid-cols-2">
+        <div>
+            <img src="https://www.pngarts.com/files/1/E-Learning-PNG-Picture.png" alt="" width="100%">
+        </div>
+        <div class="flex flex-col justify-center items-center ">
+            <h2 class="text-5xl text-white">
+
+                Course Cloud
+            </h2>
+            <p class="text-white text-justify my-3">
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis
+                quisquam laborum tempore magnam rem repudiandae debitis doloribus veniam minima perspiciatis incidunt
+                atque iure officiis maxime ea itaque, ipsum provident ipsam.</p>
+        </div>
+    </div>
+    <div class="p-3">
+        <h1 class="text-4xl text-center mb-3">Popular Courses</h1>
+        {% if courses %}
+        <div class="flex flex-wrap gap-2 justtify-around">
+            {% for i in courses %}
+            <div class="max-w-sm rounded overflow-hidden shadow-lg">
+                <img class="w-full" src="{{i.course_picture.url}}" alt="Sunset in the mountains">
+                <div class="px-6 py-4">
+                    <div class="font-bold text-xl mb-2">{{i.title}}</div>
+                    <div class="text-sm">
+                        {% for j in i.category.all %}
+                        <span>{{j.name}}</span> <b>|</b>
+                        {% endfor %}
+                    </div>
+                    <p class="text-gray-700 text-base">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et
+                        perferendis
+                        eaque, exercitationem praesentium nihil.
+                    </p>
+                </div>
+                <div class="px-6 pt-4 pb-2">
+                    <!-- <span
+                        class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#photography</span>
+                    <span
+                        class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#travel</span>
+                    <span
+                        class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#winter</span> -->
+                    <a href="{% url 'course_details' i.id %}" class="bg-gray-700 text-white px-2 py-1 border shadow rounded w-full">View
+                        More</a>
+
+                </div>
+            </div>
+
+
+
+            {% endfor %}
+        </div>
+        {% else %}
+        <h4 class="text-center text-red-600 text-3xl">No Courses Available</h4>
+        {% endif %}
+    </div>
+</div>
 
 {% endblock base %}

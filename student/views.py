@@ -1,11 +1,12 @@
 from django.shortcuts import render,redirect
 from django.views import View
-from django.views.generic import TemplateView,FormView,CreateView
+from django.views.generic import TemplateView,FormView,CreateView,ListView,DetailView
 from student.forms import *
 from django.urls import reverse_lazy
 from django.contrib.auth import login,authenticate,logout
 from django.http import HttpResponse
 from django.contrib import messages
+from instrctor.models import Course
 
 
 # django generic views
@@ -19,9 +20,10 @@ class SignupView(CreateView):
 
 
 
-class CCHomeView(View):
-    def get(self,req):
-        return render(req,'homepage.html')
+class CCHomeView(ListView):
+    template_name = 'homepage.html'
+    queryset = Course.objects.all()
+    context_object_name = 'courses'
 
 
 class SigninView(FormView):
@@ -55,3 +57,10 @@ class LogoutView(View):
     def get(self,req):
         logout(req)
         return redirect('signin')
+
+
+class CourseDetailsView(DetailView):
+    template_name = 'coursedetails.html'
+    queryset = Course.objects.all()
+    pk_url_kwarg = 'cid'
+    context_object_name = 'course'
