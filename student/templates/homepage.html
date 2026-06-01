@@ -34,9 +34,7 @@
                         {% endfor %}
                     </div>
                     <p class="text-gray-700 text-base">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et
-                        perferendis
-                        eaque, exercitationem praesentium nihil.
+                        {{i.description}}
                     </p>
                 </div>
                 <div class="px-6 pt-4 pb-2">
@@ -46,7 +44,8 @@
                         class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#travel</span>
                     <span
                         class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#winter</span> -->
-                    <a href="{% url 'course_details' i.id %}" class="bg-gray-700 text-white px-2 py-1 border shadow rounded w-full">View
+                    <a href="{% url 'course_details' i.id %}"
+                        class="bg-gray-700 text-white px-2 py-1 border shadow rounded w-full">View
                         More</a>
 
                 </div>
