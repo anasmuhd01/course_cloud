@@ -1,35 +1,59 @@
 {% extends 'base.html' %}
 {% block base %}
+<div class=" w-full p-2">
 
-<div class="grid  md:grid-cols-2 ">
-    <div class="p-3">
-        <iframe width="100%" height="315" src="{{course.thumbnail}}" title="YouTube video player" frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-
-    </div>
-
-    <div class="p-3 flex flex-col justify-around gap-2">
-        <h2 class="  text-4xl text-shadow">{{course.title}}</h2>
-        <h2 class=" text-lg text-right">
-            <i class="fa-solid fa-chalkboard-user" style="color: rgb(177, 151, 252);"></i>
-            {{course.instructor}}
-
-        </h2>
+    <div class="grid  md:grid-cols-2 ">
         <div>
-            {% for i in course.category.all %}
-            <span>{{i.name}}</span> <b>|</b>
-            {% endfor %}
+            <iframe width="560" height="315" src="{{course.thumbnail}}" title="YouTube video player" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
         </div>
 
+        <div class="p-3 flex flex-col justify-around gap-2">
+            <h2 class="  text-4xl text-shadow">{{course.title}}</h2>
+            <h2 class=" text-lg text-right">
+                <i class="fa-solid fa-chalkboard-user" style="color: rgb(177, 151, 252);"></i>
+                {{course.instructor}}
 
-        <h3 class="text-lg">RS: {{course.price}}</h3>
+            </h2>
+            <div>
+                {% for i in course.category.all %}
+                <span>{{i.name}}</span> <b>|</b>
+                {% endfor %}
+            </div>
 
-        <p class="">{{course.description}}</p>
-        <h4 class="text-lg"><b>Created At:</b>{{course.created_at}}</h4>
-        <h4 class="text-lg"><b>Updated At:</b>{{course.updated_at}}</h4>
+
+            <h3 class="text-lg">RS: {{course.price}}</h3>
+
+            <p class="">{{course.description}}</p>
+            <h4 class="text-lg"><b>Created At:</b>{{course.created_at}}</h4>
+            <h4 class="text-lg"><b>Updated At:</b>{{course.updated_at}}</h4>
+            <a href=""
+                class="w-full bg-sky-700 text-white text-xl px-3 py-1 rounded border-2 border-blue-700 shadow-2xl">
+                <i class="fa-solid fa-cart-plus" style="color: rgb(235, 233, 240);"></i>
+                Add to cart
+            </a>
+            <a href=""
+                class="w-full bg-pink-950 text-white text-xl px-3 py-1 rounded border-2 border-red-700 shadow-2xl">
+                <i class="fa-solid fa-heart-circle-plus" style="color: rgb(235, 233, 240);"></i>
+                Add to Wishlist
+            </a>
+
+        </div>
+
     </div>
+    <div>
+        <dl>
+            {% for module in course.modules.all %}
+            <dt>{{module}}</dt>
 
+            {% for lesson in module.lessons.all %}
+            <dl><b>-</b>{{lesson}}</dl>
+            {% endfor %}
+            {% endfor %}
+        </dl>
+
+    </div>
 </div>
-
 {% endblock base %}

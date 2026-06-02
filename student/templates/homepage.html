@@ -19,12 +19,12 @@
                 atque iure officiis maxime ea itaque, ipsum provident ipsam.</p>
         </div>
     </div>
-    <div class="p-3">
-        <h1 class="text-4xl text-center mb-3">Popular Courses</h1>
+    <div class="p-3 ">
+        <h1 class="text-4xl text-center mb-3 p-3">Popular Courses</h1>
         {% if courses %}
-        <div class="flex flex-wrap gap-2 justtify-around">
+        <div class="flex flex-wrap gap-2 justtify-around p-3">
             {% for i in courses %}
-            <div class="max-w-sm rounded overflow-hidden shadow-lg">
+            <div class="max-w-sm w-80 rounded-lg overflow-hidden shadow-lg bg-gray-250 ">
                 <img class="w-full" src="{{i.course_picture.url}}" alt="Sunset in the mountains">
                 <div class="px-6 py-4">
                     <div class="font-bold text-xl mb-2">{{i.title}}</div>
@@ -45,8 +45,9 @@
                     <span
                         class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#winter</span> -->
                     <a href="{% url 'course_details' i.id %}"
-                        class="bg-gray-700 text-white px-2 py-1 border shadow rounded w-full">View
-                        More</a>
+                        class="inline-flex items-center justify-center px-4 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-xl shadow-md hover:from-blue-700 hover:to-indigo-700 hover:scale-105 transition-all duration-300">
+                        View More
+                    </a>
 
                 </div>
             </div>

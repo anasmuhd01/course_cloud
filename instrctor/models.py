@@ -21,11 +21,13 @@ class InstructorProfile(models.Model):
 
     def __str__(self):
         return self.instructor.username
-    
+
+# check this -------------------------------------------- 
 @receiver(post_save,sender=User)
 def create_instructor_profile(sender,instance,created,**kwargs):
     if created and instance.role == 'Instructor':
         InstructorProfile.objects.create(instructor = instance)
+# check this -------------------------------------------- 
 
 
 class Category(models.Model):
