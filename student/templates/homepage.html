@@ -4,7 +4,11 @@
 <!-- <h1>{{request.user}}</h1> -->
 
 <div class="w-full">
+    {% for msg in messages %}
+    <span class="text-center">{{msg}}</span>
+    {% endfor %}
     <div class="bg-gray-800 grid grid-cols-1 md:grid-cols-2">
+
         <div>
             <img src="https://www.pngarts.com/files/1/E-Learning-PNG-Picture.png" alt="" width="100%">
         </div>

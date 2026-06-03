@@ -1,0 +1,73 @@
+{% extends 'base.html' %}
+{% block base %}
+
+<div class="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded rounded-base border border-default">
+    <table class="w-full text-sm text-left rtl:text-right text-body">
+        <thead class="text-sm text-body bg-neutral-secondary-soft border-b rounded-base border-default">
+            <tr>
+                <th scope="col" class="px-6 py-3 font-medium">
+                    SN:
+                </th>
+                <th scope="col" class="px-6 py-3 font-medium">
+                    Course name
+                </th>
+
+                <th scope="col" class="px-6 py-3 font-medium">
+                    Image
+                </th>
+                <th scope="col" class="px-6 py-3 font-medium">
+                    Added at
+                </th>
+                <th scope="col" class="px-6 py-3 font-medium">
+                    Price
+                </th>
+                <th scope="col" class="px-6 py-3 font-medium">
+
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for i in data %}
+            <tr class="bg-neutral-primary border-b border-default">
+                <th scope="row" class="px-6 py-4 font-medium text-heading whitespace-nowrap">
+                    {{forloop.counter}}
+                </th>
+                <td class="px-6 py-4">
+                    {{i.course_object.title}}
+                </td>
+                <td class="px-6 py-4">
+                    <img src="{{i.course_object.course_picture.url}}" alt="no preview" width="200px">
+
+                </td>
+                <td class="px-6 py-4">
+                    {{i.added_at}}
+                </td>
+                <td class="px-6 py-4">
+                    {{i.course_object.price}}
+                </td>
+                <td class="px-6 py-4">
+                    <a href="{% url 'dltcartitm' i.id %}">
+                        <i class="fa-solid fa-trash" style="color: rgb(210, 23, 23);"></i>
+
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+
+        </tbody>
+    </table>
+</div>
+
+<div class="border-3 border-grey-700 rounded p-1 mt-4">
+    <div class="flex flex-col gap-2">
+        <h1>Total Course : <span>{{count}}</span></h1>
+        <h1>Total Price : <span>{{price}}</span></h1>
+        <a href=""
+            class="bg-gray-800 text-white text-xl w-full block text-center border border-black shadow-2xl rounded">
+            checkout
+        </a>
+    </div>
+
+</div>
+
+{% endblock base %}

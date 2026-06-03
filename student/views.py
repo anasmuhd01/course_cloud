@@ -7,6 +7,7 @@ from django.contrib.auth import login,authenticate,logout
 from django.http import HttpResponse
 from django.contrib import messages
 from instrctor.models import Course
+from student.models import Cart,Course
 
 
 # django generic views
@@ -64,3 +65,32 @@ class CourseDetailsView(DetailView):
     queryset = Course.objects.all()
     pk_url_kwarg = 'cid'
     context_object_name = 'course'
+
+
+class AddtoCart(View):
+    def get(self,req,**kwargs):
+        id = kwargs.get('id')
+        course = Course.objects.get(id=id)
+        student = req.user
+        (object,created) = Cart.objects.get_or_create(course_object=course,student_object=student)
+        if created:
+            return redirect('cchome')
+        else:
+            messages.warning(req,'Already added to cart')
+            return redirect('cchome')
+        
+
+class CartlistView(View):
+    def get(self,req):
+        cartlist = Cart.objects.filter(student_object = req.user)
+        cart_count = cartlist.count()
+        total = 0
+        for i in cartlist:
+            total += i.course_object.price
+        return render(req,'cartlist.html',{'data':cartlist,'count':cart_count,'price':total})
+    
+class DeleteCartItemView(View):
+    def get(self,req,**kwargs):
+        cid = kwargs.get('id')
+        Cart.objects.get(id=cid).delete()
+        return redirect('cartlist')
