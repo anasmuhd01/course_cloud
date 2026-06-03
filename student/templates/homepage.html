@@ -1,69 +1,345 @@
 {% extends 'base.html' %}
 {% block base %}
 
-<!-- <h1>{{request.user}}</h1> -->
-
 <div class="w-full">
-    {% for msg in messages %}
-    <span class="text-center">{{msg}}</span>
-    {% endfor %}
-    <div class="bg-gray-800 grid grid-cols-1 md:grid-cols-2">
 
-        <div>
-            <img src="https://www.pngarts.com/files/1/E-Learning-PNG-Picture.png" alt="" width="100%">
+  
+    <!-- Messages -->
+    {% if messages %}
+    <div class="fixed top-20 right-5 z-50 space-y-3">
+        {% for msg in messages %}
+        <div
+            class="message-box bg-green-500 text-white px-6 py-3 rounded-xl shadow-xl border border-green-300 font-medium">
+            {{ msg }}
         </div>
-        <div class="flex flex-col justify-center items-center ">
-            <h2 class="text-5xl text-white">
-
-                Course Cloud
-            </h2>
-            <p class="text-white text-justify my-3">
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Omnis
-                quisquam laborum tempore magnam rem repudiandae debitis doloribus veniam minima perspiciatis incidunt
-                atque iure officiis maxime ea itaque, ipsum provident ipsam.</p>
-        </div>
+        {% endfor %}
     </div>
-    <div class="p-3 ">
-        <h1 class="text-4xl text-center mb-3 p-3">Popular Courses</h1>
-        {% if courses %}
-        <div class="flex flex-wrap gap-2 justtify-around p-3">
-            {% for i in courses %}
-            <div class="max-w-sm w-80 rounded-lg overflow-hidden shadow-lg bg-gray-250 ">
-                <img class="w-full" src="{{i.course_picture.url}}" alt="Sunset in the mountains">
-                <div class="px-6 py-4">
-                    <div class="font-bold text-xl mb-2">{{i.title}}</div>
-                    <div class="text-sm">
-                        {% for j in i.category.all %}
-                        <span>{{j.name}}</span> <b>|</b>
-                        {% endfor %}
-                    </div>
-                    <p class="text-gray-700 text-base">
-                        {{i.description}}
-                    </p>
-                </div>
-                <div class="px-6 pt-4 pb-2">
-                    <!-- <span
-                        class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#photography</span>
-                    <span
-                        class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#travel</span>
-                    <span
-                        class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">#winter</span> -->
-                    <a href="{% url 'course_details' i.id %}"
-                        class="inline-flex items-center justify-center px-4 py-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-semibold rounded-xl shadow-md hover:from-blue-700 hover:to-indigo-700 hover:scale-105 transition-all duration-300">
-                        View More
-                    </a>
+    {% endif %}
 
-                </div>
+    <!-- Hero Section -->
+    <section
+        class="bg-gradient-to-r from-slate-900 via-blue-900 to-slate-800 min-h-[80vh] grid grid-cols-1 md:grid-cols-2 items-center px-6 md:px-20 overflow-hidden">
+
+        <!-- Left Side -->
+        <div class="text-white">
+
+            <span class="inline-block bg-cyan-500/20 text-cyan-300 px-4 py-2 rounded-full text-sm font-semibold mb-6">
+                🚀 Learn. Build. Grow.
+            </span>
+
+            <h1 class="text-5xl md:text-6xl font-bold leading-tight mb-6">
+                Learn Skills That
+                <span class="text-cyan-400">Shape Your Future</span>
+            </h1>
+
+            <p class="text-lg text-gray-300 leading-relaxed mb-8">
+                Master programming, AI, web development, cloud computing,
+                data science and other high-demand skills through practical,
+                industry-focused courses.
+            </p>
+
+            <div class="flex flex-wrap gap-4">
+
+                <a href="#courses"
+                    class="bg-cyan-500 hover:bg-cyan-600 px-8 py-3 rounded-xl font-semibold transition shadow-lg">
+                    Explore Courses
+                </a>
+
+                <a href="#"
+                    class="border border-white px-8 py-3 rounded-xl hover:bg-white hover:text-slate-900 transition">
+                    Learn More
+                </a>
+
             </div>
 
+            <!-- Stats -->
+            <div class="flex gap-10 mt-12">
 
+                <div>
+                    <h3 class="text-3xl font-bold text-cyan-400">
+                        {{ courses|length }}+
+                    </h3>
+                    <p class="text-gray-300">Courses</p>
+                </div>
+
+                <div>
+                    <h3 class="text-3xl font-bold text-cyan-400">
+                        1000+
+                    </h3>
+                    <p class="text-gray-300">Students</p>
+                </div>
+
+                <div>
+                    <h3 class="text-3xl font-bold text-cyan-400">
+                        24/7
+                    </h3>
+                    <p class="text-gray-300">Access</p>
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- Right Side -->
+    <!-- Right Side -->
+    
+    <div class="relative hidden lg:flex justify-center items-center h-[650px]">
+    
+        
+        <!-- Main Image -->
+        <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f" alt="Students Learning"
+            class="w-[460px] rounded-3xl shadow-2xl z-10 hover:scale-105 transition duration-500">
+    
+        <!-- Top Small -->
+        <div
+            class="absolute top-6 left-40 bg-white/90 backdrop-blur-md px-4 py-3 rounded-2xl shadow-xl hover:scale-110 transition-all duration-300">
+    
+            <div class="font-semibold text-sm">
+                🐍 Python
+            </div>
+    
+            <div class="text-xs text-gray-500">
+                Beginner Friendly
+            </div>
+    
+        </div>
+    
+        <!-- Left Large -->
+        <div
+            class="absolute left-0 top-[45%] bg-white/90 backdrop-blur-md px-6 py-4 rounded-2xl shadow-xl hover:scale-105 transition-all duration-300 w-52">
+    
+            <h3 class="font-bold text-lg">
+                🌐 Web Development
+            </h3>
+    
+            <p class="text-sm text-gray-500 mt-1">
+                HTML, CSS, Tailwind, Django & React
+            </p>
+    
+        </div>
+    
+        <!-- Right Small -->
+        <div
+            class="absolute right-2 top-[35%] bg-white/90 backdrop-blur-md px-4 py-3 rounded-2xl shadow-xl hover:scale-110 transition-all duration-300">
+    
+            <div class="font-semibold text-sm">
+                🤖 AI & ML
+            </div>
+    
+            <div class="text-xs text-gray-500">
+                Trending Skill
+            </div>
+    
+        </div>
+    
+        <!-- Bottom Large -->
+        <div
+            class="absolute bottom-8 right-24 bg-white/90 backdrop-blur-md px-6 py-4 rounded-2xl shadow-xl hover:scale-105 transition-all duration-300 w-56">
+    
+            <h3 class="font-bold text-lg">
+                📊 Data Science
+            </h3>
+    
+            <p class="text-sm text-gray-500 mt-1">
+                Analytics, Python & Visualization
+            </p>
+    
+        </div>
+        ```
+    
+    </div>
+
+
+        </div>
+
+    </section>
+
+    <!-- Popular Courses -->
+    <section class="py-16 bg-gray-50" id="courses">
+
+        <div class="text-center mb-12">
+
+            <span class="text-blue-600 uppercase tracking-wider font-semibold">
+                Featured Learning
+            </span>
+
+            <h1 class="text-5xl md:text-6xl font-bold mt-3">
+                Popular Courses
+            </h1>
+
+            <p class="text-gray-500 mt-4 text-lg max-w-2xl mx-auto">
+                Start learning from our most popular and highly-rated courses.
+            </p>
+
+        </div>
+
+        {% if courses %}
+
+        <div class="flex flex-wrap justify-center gap-8 px-4">
+
+            {% for i in courses %}
+
+            <div
+                class="w-80 bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300 flex flex-col">
+
+                <!-- Image -->
+                <div class="overflow-hidden">
+                    <img src="{{i.course_picture.url}}" alt="{{i.title}}"
+                        class="w-full h-52 object-cover hover:scale-110 transition duration-500">
+                </div>
+
+                <!-- Content -->
+                <div class="p-5 flex flex-col flex-1">
+
+                    <h2 class="text-2xl font-bold text-gray-800 mb-3">
+                        {{i.title}}
+                    </h2>
+
+                    <div class="flex flex-wrap gap-2 mb-4">
+
+                        {% for j in i.category.all %}
+                        <span class="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-medium">
+                            {{j.name}}
+                        </span>
+                        {% endfor %}
+
+                    </div>
+
+                    <div class="flex-grow">
+                        <p class="text-gray-600 text-sm leading-relaxed">
+                            {{i.description|truncatewords:25}}
+                        </p>
+                    </div>
+
+                    <div class="pt-5 mt-auto">
+
+                        <a href="{% url 'course_details' i.id %}"
+                            class="w-full flex justify-center items-center bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-3 rounded-xl font-semibold hover:from-blue-700 hover:to-indigo-700 transition">
+
+                            View Course
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
 
             {% endfor %}
+
         </div>
+
         {% else %}
-        <h4 class="text-center text-red-600 text-3xl">No Courses Available</h4>
+
+        <div class="text-center">
+            <h3 class="text-3xl text-red-500 font-semibold">
+                No Courses Available
+            </h3>
+            <p class="text-gray-500 mt-3">
+                New courses will be available soon.
+            </p>
+        </div>
+
         {% endif %}
-    </div>
+
+    </section>
+   
+
 </div>
+<!-- Why Choose Us -->
+
+<section class="py-20 bg-white">
+
+    ```
+    <div class="max-w-6xl mx-auto px-6">
+
+        <div class="text-center mb-14">
+
+            <span class="text-blue-600 uppercase tracking-wider font-semibold">
+                Why Choose Us
+            </span>
+
+            <h2 class="text-4xl md:text-5xl font-bold mt-3">
+                Why Learn With Course Cloud?
+            </h2>
+
+            <p class="text-gray-500 mt-4 max-w-2xl mx-auto">
+                Learn from practical courses designed to help you build real-world skills and grow your career.
+            </p>
+
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-8">
+
+            <!-- Card 1 -->
+            <div
+                class="bg-gradient-to-br from-blue-50 to-white p-8 rounded-3xl shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+
+                <div class="text-5xl mb-5">
+                    📚
+                </div>
+
+                <h3 class="text-2xl font-bold mb-3">
+                    Quality Content
+                </h3>
+
+                <p class="text-gray-600">
+                    Carefully structured courses designed to provide practical knowledge and hands-on learning.
+                </p>
+
+            </div>
+
+            <!-- Card 2 -->
+            <div
+                class="bg-gradient-to-br from-cyan-50 to-white p-8 rounded-3xl shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+
+                <div class="text-5xl mb-5">
+                    🎯
+                </div>
+
+                <h3 class="text-2xl font-bold mb-3">
+                    Career Focused
+                </h3>
+
+                <p class="text-gray-600">
+                    Learn technologies and tools that are actively used in modern companies and startups.
+                </p>
+
+            </div>
+
+            <!-- Card 3 -->
+            <div
+                class="bg-gradient-to-br from-indigo-50 to-white p-8 rounded-3xl shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all duration-300">
+
+                <div class="text-5xl mb-5">
+                    🚀
+                </div>
+
+                <h3 class="text-2xl font-bold mb-3">
+                    Learn Anywhere
+                </h3>
+
+                <p class="text-gray-600">
+                    Access your courses anytime, anywhere and learn at your own pace from any device.
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+    
+
+</section>
+
+
+<script>
+    setTimeout(() => {
+        document.querySelectorAll('.message-box').forEach(el => {
+            el.style.display = 'none';
+        });
+    }, 3000);
+</script>
 
 {% endblock base %}

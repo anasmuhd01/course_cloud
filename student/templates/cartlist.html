@@ -2,6 +2,7 @@
 {% block base %}
 
 <div class="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded rounded-base border border-default">
+    {%if data %}
     <table class="w-full text-sm text-left rtl:text-right text-body">
         <thead class="text-sm text-body bg-neutral-secondary-soft border-b rounded-base border-default">
             <tr>
@@ -27,6 +28,7 @@
             </tr>
         </thead>
         <tbody>
+
             {% for i in data %}
             <tr class="bg-neutral-primary border-b border-default">
                 <th scope="row" class="px-6 py-4 font-medium text-heading whitespace-nowrap">
@@ -54,9 +56,12 @@
             </tr>
             {% endfor %}
 
+
         </tbody>
     </table>
 </div>
+
+
 
 <div class="border-3 border-grey-700 rounded p-1 mt-4">
     <div class="flex flex-col gap-2">
@@ -69,5 +74,17 @@
     </div>
 
 </div>
+
+{% else %}
+<div class="min-h-[80vh] flex flex-col items-center justify-center gap-4">
+    <img src="https://www.krosfitsports.com/public/empty-cart.gif" alt="Empty Cart" class="w-96 max-w-full">
+
+    <h2 class="text-2xl font-bold">
+        Your Cart is Empty
+    </h2>
+
+    
+</div>
+{% endif %}
 
 {% endblock base %}

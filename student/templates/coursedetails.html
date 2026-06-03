@@ -1,59 +1,217 @@
 {% extends 'base.html' %}
 {% block base %}
-<div class=" w-full p-2">
 
-    <div class="grid  md:grid-cols-2 ">
-        <div>
-            <iframe width="560" height="315" src="{{course.thumbnail}}" title="YouTube video player" frameborder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+<div class="bg-slate-50 min-h-screen py-8">
 
-        </div>
+    <div class="max-w-7xl mx-auto px-4">
 
-        <div class="p-3 flex flex-col justify-around gap-2">
-            <h2 class="  text-4xl text-shadow">{{course.title}}</h2>
-            <h2 class=" text-lg text-right">
-                <i class="fa-solid fa-chalkboard-user" style="color: rgb(177, 151, 252);"></i>
-                {{course.instructor}}
+        <!-- Main Course Section -->
+        <div class="grid lg:grid-cols-3 gap-8">
 
-            </h2>
-            <div>
-                {% for i in course.category.all %}
-                <span>{{i.name}}</span> <b>|</b>
-                {% endfor %}
+            <!-- Left Side -->
+            <div class="lg:col-span-2">
+
+                <!-- Video -->
+                <div class="bg-white rounded-3xl shadow-lg overflow-hidden">
+
+                    <!-- <iframe class="w-full h-[250px] md:h-[500px]" src="{{course.thumbnail}}"
+                        title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen>
+                    </iframe> -->
+                    <iframe class="w-full rounded" height="500" src="{{course.thumbnail}}" title="YouTube video player" frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+                </div>
+
+                <!-- Course Info -->
+                <div class="bg-white rounded-3xl shadow-lg p-8 mt-6">
+
+                    <h1 class="text-4xl md:text-5xl font-bold text-slate-800 mb-4">
+                        {{course.title}}
+                    </h1>
+
+                    <!-- Categories -->
+                    <div class="flex flex-wrap gap-2 mb-6">
+
+                        {% for i in course.category.all %}
+                        <span class="bg-blue-100 text-blue-700 px-4 py-1 rounded-full text-sm font-medium">
+                            {{i.name}}
+                        </span>
+                        {% endfor %}
+
+                    </div>
+
+                    <p class="text-gray-600 text-lg leading-relaxed">
+                        {{course.description}}
+                    </p>
+
+                </div>
+
             </div>
 
+            <!-- Right Side Card -->
+            <div>
 
-            <h3 class="text-lg">RS: {{course.price}}</h3>
+                <div class="bg-white rounded-3xl shadow-lg p-6 lg:sticky lg:top-24">
 
-            <p class="">{{course.description}}</p>
-            <h4 class="text-lg"><b>Created At:</b>{{course.created_at}}</h4>
-            <h4 class="text-lg"><b>Updated At:</b>{{course.updated_at}}</h4>
-            <a href="{% url 'addtocart' course.id %}"
-                class="w-full bg-sky-700 text-white text-xl px-3 py-1 rounded border-2 border-blue-700 shadow-2xl">
-                <i class="fa-solid fa-cart-plus" style="color: rgb(235, 233, 240);"></i>
-                Add to cart
-            </a>
-            <a href=""
-                class="w-full bg-pink-950 text-white text-xl px-3 py-1 rounded border-2 border-red-700 shadow-2xl">
-                <i class="fa-solid fa-heart-circle-plus" style="color: rgb(235, 233, 240);"></i>
-                Add to Wishlist
-            </a>
+                    <!-- Instructor -->
+                    <div class="flex items-center justify-between mb-6">
+
+                        <div>
+
+                            <p class="text-gray-500 text-sm">
+                                Instructor
+                            </p>
+
+                            <h3 class="font-semibold text-lg">
+                                {{course.instructor}}
+                            </h3>
+
+                        </div>
+
+                        <div class="w-12 h-12 rounded-full bg-indigo-100 flex items-center justify-center">
+
+                            <i class="fa-solid fa-chalkboard-user text-indigo-600"></i>
+
+                        </div>
+
+                    </div>
+
+                    <!-- Price -->
+                    <div class="mb-8">
+
+                        <p class="text-gray-500 text-sm">
+                            Course Price
+                        </p>
+
+                        <h2 class="text-4xl font-bold text-green-600">
+                            ₹{{course.price}}
+                        </h2>
+
+                    </div>
+
+                    <!-- Details -->
+                    <div class="space-y-4 mb-8 text-gray-600">
+
+                        <div class="flex justify-between">
+                            <span>Created</span>
+                            <span>{{course.created_at|date:"d M Y"}}</span>
+                        </div>
+
+                        <div class="flex justify-between">
+                            <span>Updated</span>
+                            <span>{{course.updated_at|date:"d M Y"}}</span>
+                        </div>
+
+                    </div>
+
+                    <!-- Buttons -->
+                    <div class="space-y-3">
+
+                        <a href="{% url 'addtocart' course.id %}"
+                            class="w-full flex justify-center items-center gap-2 bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-4 rounded-xl font-semibold hover:from-blue-700 hover:to-indigo-700 transition">
+
+                            <i class="fa-solid fa-cart-plus"></i>
+                            Add To Cart
+
+                        </a>
+
+                        <a href="#"
+                            class="w-full flex justify-center items-center gap-2 border-2 border-pink-500 text-pink-600 py-4 rounded-xl font-semibold hover:bg-pink-500 hover:text-white transition">
+
+                            <i class="fa-solid fa-heart"></i>
+                            Add To Wishlist
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
 
         </div>
 
-    </div>
-    <div>
-        <dl>
-            {% for module in course.modules.all %}
-            <dt>{{module}}</dt>
+        <!-- Curriculum Section -->
+        <!-- Curriculum Section -->
 
-            {% for lesson in module.lessons.all %}
-            <dl><b>-</b>{{lesson}}</dl>
-            {% endfor %}
-            {% endfor %}
-        </dl>
+        <div class="bg-white rounded-3xl shadow-lg p-8 mt-8">
+
+
+            <div class="flex items-center justify-between mb-8">
+
+                <h2 class="text-3xl font-bold">
+                    Course Curriculum
+                </h2>
+
+                <span class="bg-blue-100 text-blue-700 px-4 py-2 rounded-full text-sm font-medium">
+                    {{course.modules.count}} Modules
+                </span>
+
+            </div>
+
+            {% if course.modules.all %}
+
+            <div class="space-y-4">
+
+                {% for module in course.modules.all %}
+
+                <details class="group border border-gray-200 rounded-2xl overflow-hidden">
+
+                    <summary
+                        class="flex justify-between items-center cursor-pointer bg-slate-100 px-6 py-4 font-semibold text-lg hover:bg-slate-200 transition">
+
+                        <span>
+                            📚 {{module}}
+                        </span>
+
+                        <span class="group-open:rotate-180 transition duration-300">
+                            ▼
+                        </span>
+
+                    </summary>
+
+                    <div class="p-5 bg-white">
+
+                        {% for lesson in module.lessons.all %}
+
+                        <div class="flex items-center gap-3 py-3 border-b last:border-0">
+
+                            <i class="fa-solid fa-play text-blue-600"></i>
+
+                            <span class="text-gray-700">
+                                {{lesson}}
+                            </span>
+
+                        </div>
+
+                        {% empty %}
+
+                        <p class="text-gray-400">
+                            No lessons available.
+                        </p>
+
+                        {% endfor %}
+
+                    </div>
+
+                </details>
+
+                {% endfor %}
+
+            </div>
+
+            {% endif %}
+
+
+        </div>
+
 
     </div>
+
+
 </div>
+
 {% endblock base %}

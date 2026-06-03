@@ -11,114 +11,167 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
         integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
 
+            const btn = document.getElementById('mobile-btn');
+            const menu = document.getElementById('mobile-menu');
+
+            btn.addEventListener('click', function () {
+                menu.classList.toggle('hidden');
+            });
+
+        });
+    </script>
 </head>
 
 <body>
 
 
-    <nav class="relative bg-gray-800">
-        <div class="mx-auto max-w-7xl px-2 sm:px-6 lg:px-8">
-            <div class="relative flex h-16 items-center justify-between">
-                <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
-                    <!-- Mobile menu button-->
-                    <button type="button" command="--toggle" commandfor="mobile-menu"
-                        class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-white/5 hover:text-white focus:outline-2 focus:-outline-offset-1 focus:outline-indigo-500">
-                        <span class="absolute -inset-0.5"></span>
-                        <span class="sr-only">Open main menu</span>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" data-slot="icon"
-                            aria-hidden="true" class="size-6 in-aria-expanded:hidden">
-                            <path d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" stroke-linecap="round"
-                                stroke-linejoin="round" />
-                        </svg>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" data-slot="icon"
-                            aria-hidden="true" class="size-6 not-in-aria-expanded:hidden">
-                            <path d="M6 18 18 6M6 6l12 12" stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                    </button>
-                </div>
-                <div class="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
-                    <div class="flex shrink-0 items-center">
-                        <i class="fa-regular fa-cloud fa-2xl" style="color: rgb(99, 230, 190);"></i>
-                    </div>
-                    <div class="hidden sm:ml-6 sm:block">
-                        <div class="flex space-x-4">
-                            <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-white/5 hover:text-white" -->
-                            <a href="{% url 'cchome' %}" aria-current="page"
-                                class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white">Home</a>
+    <nav class="bg-gray-800 shadow-lg sticky top-0 z-50">
 
-                            <a href="#"
-                                class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Whishlist</a>
-                            <a href="{% url 'cartlist' %}"
-                                class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Cart</a>
-                            <a href="#"
-                                class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">My
-                                Course</a>
+        <div class="max-w-7xl mx-auto px-4">
+
+            <div class="flex justify-between items-center h-16">
+
+                <!-- Logo -->
+                <div class="flex items-center gap-3">
+
+                    <a href="{% url 'cchome' %}" class="flex items-center gap-3 text-white font-bold text-xl">
+
+                        <i class="fa-solid fa-cloud text-cyan-400 text-2xl"></i>
+
+                        <span class="hidden sm:block">
+                            Course Cloud
+                        </span>
+
+                    </a>
+
+                </div>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex items-center gap-2">
+
+                    <a href="{% url 'cchome' %}"
+                        class="px-4 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-gray-700 transition">
+                        <i class="fa-solid fa-house mr-2"></i>
+                        Home
+                    </a>
+
+                    <a href="#"
+                        class="px-4 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-gray-700 transition">
+                        <i class="fa-solid fa-heart mr-2"></i>
+                        Wishlist
+                    </a>
+
+                    <a href="{% url 'cartlist' %}"
+                        class="relative px-4 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-gray-700 transition">
+
+                        <i class="fa-solid fa-cart-shopping mr-2"></i>
+                        Cart
+
+                        {% if cart_count %}
+                        <span
+                            class="absolute -top-1 -right-1 bg-red-500 text-white text-xs min-w-[20px] h-5 px-1 flex items-center justify-center rounded-full font-bold">
+                            {{cart_count}}
+                        </span>
+                        {% endif %}
+
+                    </a>
+
+                    <a href="#"
+                        class="px-4 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-gray-700 transition">
+
+                        <i class="fa-solid fa-graduation-cap mr-2"></i>
+                        My Courses
+
+                    </a>
+
+                </div>
+
+                <!-- Right Side -->
+                <div class="flex items-center gap-3">
+
+                    <!-- User -->
+                    <div class="hidden sm:flex items-center gap-2 bg-gray-900 px-4 py-2 rounded-xl">
+
+                        <div class="w-8 h-8 rounded-full bg-cyan-500 flex items-center justify-center text-white">
+
+                            <i class="fa-solid fa-user"></i>
+
                         </div>
-                    </div>
-                </div>
-                <div class="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                    <div>
 
-                        <a href="#" class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white">
-                            <i class="fa-solid fa-user" style="color: rgb(235, 233, 240);"></i>
+                        <span class="text-white text-sm max-w-[120px] truncate">
                             {{request.user}}
-                        </a>
+                        </span>
+
                     </div>
 
+                    <!-- Logout -->
                     <a href="{% url 'logout' %}"
-                        class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-white/5 hover:text-white">Logout</a>
+                        class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-xl transition">
 
-                    <!-- <button type="button"
-                        class="relative rounded-full p-1 text-gray-400 focus:outline-2 focus:outline-offset-2 focus:outline-indigo-500">
-                        <span class="absolute -inset-1.5"></span>
-                        <span class="sr-only">View notifications</span>
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" data-slot="icon"
-                            aria-hidden="true" class="size-6">
-                            <path
-                                d="M14.857 17.082a23.848 23.848 0 0 0 5.454-1.31A8.967 8.967 0 0 1 18 9.75V9A6 6 0 0 0 6 9v.75a8.967 8.967 0 0 1-2.312 6.022c1.733.64 3.56 1.085 5.455 1.31m5.714 0a24.255 24.255 0 0 1-5.714 0m5.714 0a3 3 0 1 1-5.714 0"
-                                stroke-linecap="round" stroke-linejoin="round" />
-                        </svg>
-                    </button> -->
+                        <i class="fa-solid fa-right-from-bracket"></i>Logout
 
-                    <!-- Profile dropdown -->
-                    <el-dropdown class="relative ml-3">
-                        <button
-                            class="relative flex rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
-                            <span class="absolute -inset-1.5"></span>
-                            <span class="sr-only">Open user menu</span>
+                    </a>
 
-                        </button>
+                    <!-- Mobile Menu Button -->
+                    <button id="mobile-btn" class="md:hidden text-white text-xl ml-2">
 
-                        <el-menu anchor="bottom end" popover
-                            class="w-48 origin-top-right rounded-md bg-white py-1 shadow-lg outline outline-black/5 transition transition-discrete [--anchor-gap:--spacing(2)] data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in">
-                            <a href="#"
-                                class="block px-4 py-2 text-sm text-gray-700 focus:bg-gray-100 focus:outline-hidden">Your
-                                profile</a>
-                            <a href="#"
-                                class="block px-4 py-2 text-sm text-gray-700 focus:bg-gray-100 focus:outline-hidden">Settings</a>
-                            <a href="#"
-                                class="block px-4 py-2 text-sm text-gray-700 focus:bg-gray-100 focus:outline-hidden">Sign
-                                out</a>
-                        </el-menu>
-                    </el-dropdown>
+                        <i class="fa-solid fa-bars"></i>
+
+                    </button>
+
                 </div>
+
             </div>
+
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="hidden md:hidden pb-4">
+
+                <div class="flex flex-col gap-2">
+
+                    <a href="{% url 'cchome' %}" class="text-gray-300 hover:bg-gray-700 rounded-lg px-4 py-3">
+
+                        <i class="fa-solid fa-house mr-2"></i>
+                        Home
+
+                    </a>
+
+                    <a href="#" class="text-gray-300 hover:bg-gray-700 rounded-lg px-4 py-3">
+
+                        <i class="fa-solid fa-heart mr-2"></i>
+                        Wishlist
+
+                    </a>
+
+                    <a href="{% url 'cartlist' %}" class="text-gray-300 hover:bg-gray-700 rounded-lg px-4 py-3">
+
+                        <i class="fa-solid fa-cart-shopping mr-2"></i>
+                        Cart
+
+                    </a>
+
+                    <a href="#" class="text-gray-300 hover:bg-gray-700 rounded-lg px-4 py-3">
+
+                        <i class="fa-solid fa-graduation-cap mr-2"></i>
+                        My Courses
+
+                    </a>
+
+                    <a href="{% url 'logout' %}" class="text-red-400 hover:bg-gray-700 rounded-lg px-4 py-3">
+
+                        <i class="fa-solid fa-right-from-bracket mr-2"></i>
+                        Logout
+
+                    </a>
+
+                </div>
+
+            </div>
+
         </div>
 
-        <el-disclosure id="mobile-menu" hidden class="block sm:hidden">
-            <div class="space-y-1 px-2 pt-2 pb-3">
-                <!-- Current: "bg-gray-900 text-white", Default: "text-gray-300 hover:bg-white/5 hover:text-white" -->
-                <a href="#" aria-current="page"
-                    class="block rounded-md bg-gray-900 px-3 py-2 text-base font-medium text-white">Dashboard</a>
-                <a href="#"
-                    class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-white/5 hover:text-white">Team</a>
-                <a href="#"
-                    class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-white/5 hover:text-white">Projects</a>
-                <a href="#"
-                    class="block rounded-md px-3 py-2 text-base font-medium text-gray-300 hover:bg-white/5 hover:text-white">Calendar</a>
-            </div>
-        </el-disclosure>
     </nav>
     <div style="min-height: 70vh;">
         {% block base %}
