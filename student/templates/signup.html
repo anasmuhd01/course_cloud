@@ -4,68 +4,100 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <title>Create Account</title>
 
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 </head>
 
-<body class="bg-gray-900">
-    <!--
-  This example requires updating your template:
+<body
+    class="min-h-screen bg-gradient-to-br from-slate-950 via-indigo-950 to-slate-900 flex items-center justify-center p-6">
 
-  ```
-  <html class="h-full bg-gray-900">
-  <body class="h-full">
-  ```
--->
-    <div class="container flex min-h-full flex-col items-center justify-center px-6 py-12 lg:px-8  ">
+    <!-- Background Blur -->
+    <div class="absolute inset-0 overflow-hidden">
+        <div class="absolute top-20 left-20 h-72 w-72 rounded-full bg-indigo-600/20 blur-3xl"></div>
+        <div class="absolute bottom-20 right-20 h-72 w-72 rounded-full bg-purple-600/20 blur-3xl"></div>
+    </div>
 
-        <h2 class="text-5xl font-semibold tracking-tight text-white sm:text-7xl">Sign Up</h2>
+    <!-- Card -->
+    <div class="relative w-full max-w-md rounded-3xl border border-white/10 bg-white/5 backdrop-blur-xl shadow-2xl p-8">
 
-        <div class="mt-10 sm:mx-auto sm:w-full sm:max-w-sm">
-            <form action="#" method="POST" class="space-y-6">
-                {% csrf_token %}
-
-
-                <div class="mt-2">
-                    <input id="text" type="text" name="username" placeholder="Username"
-                        class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6" />
-                    <span class=" font text-amber-500">{{form.username.errors}}</span>
-                </div>
-
-                <div class="mt-2">
-                    <input id="email" type="email" name="email" required autocomplete="email" placeholder="Enter Email"
-                        class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6" />
-                </div>
-
-
-                <div class="mt-2">
-                    <input id="password" type="password" name="password1" required autocomplete="current-password"
-                        placeholder="Enter Password"
-                        class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6" />
-                </div>
-
-
-
-                <div class="mt-2">
-                    <input id="password" type="password" name="password2" required autocomplete="current-password"
-                        placeholder="Confirm Password"
-                        class="block w-full rounded-md bg-white/5 px-3 py-1.5 text-base text-white outline-1 -outline-offset-1 outline-white/10 placeholder:text-gray-500 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-500 sm:text-sm/6" />
-                    <span class="text-amber-500">{{form.password2.errors}}</span>
-                </div>
-
-
-                <div class="flex justify-between">
-                    <button type="submit"
-                        class="flex  justify-center rounded-md bg-indigo-500 px-3 py-1.5 text-sm/6 font-semibold text-white hover:bg-indigo-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">Sign
-                        up</button>
-                    <a href="{% url 'signin' %}" class="underline text-white">Already registerd ?</a>
-                </div>
-
-            </form>
-
-
+        <!-- Logo/Icon -->
+        <div class="flex justify-center mb-6">
+            <div
+                class="flex h-16 w-16 items-center justify-center rounded-2xl bg-indigo-500 shadow-lg shadow-indigo-500/30">
+                <span class="text-3xl text-white">👋</span>
+            </div>
         </div>
+
+        <!-- Heading -->
+        <div class="text-center">
+            <h1 class="text-4xl font-bold text-white">
+                Create Account
+            </h1>
+
+            <p class="mt-2 text-gray-400">
+                Join us and start your journey today.
+            </p>
+        </div>
+
+        <!-- Form -->
+        <form method="POST" class="mt-8 space-y-5">
+            {% csrf_token %}
+
+            <!-- Username -->
+            <div>
+                <input type="text" name="username" placeholder="Username"
+                    class="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-white placeholder-gray-500 outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30" />
+
+                <p class="mt-1 text-sm text-red-400">
+                    {{ form.username.errors }}
+                </p>
+            </div>
+
+            <!-- Email -->
+            <div>
+                <input type="email" name="email" placeholder="Email Address" required
+                    class="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-white placeholder-gray-500 outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30" />
+            </div>
+
+            <!-- Password -->
+            <div>
+                <input type="password" name="password1" placeholder="Password" required
+                    class="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-white placeholder-gray-500 outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30" />
+            </div>
+
+            <!-- Confirm Password -->
+            <div>
+                <input type="password" name="password2" placeholder="Confirm Password" required
+                    class="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-white placeholder-gray-500 outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30" />
+
+                <p class="mt-1 text-sm text-red-400">
+                    {{ form.password2.errors }}
+                </p>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit"
+                class="w-full rounded-xl bg-gradient-to-r from-indigo-500 to-purple-600 py-3 font-semibold text-white transition duration-300 hover:scale-[1.02] hover:shadow-lg hover:shadow-indigo-500/30">
+                Create Account
+            </button>
+
+            <!-- Divider -->
+            <div class="flex items-center gap-4">
+                <div class="h-px flex-1 bg-white/10"></div>
+                <span class="text-sm text-gray-500">OR</span>
+                <div class="h-px flex-1 bg-white/10"></div>
+            </div>
+
+            <!-- Login Link -->
+            <p class="text-center text-gray-400">
+                Already have an account?
+                <a href="{% url 'signin' %}" class="font-semibold text-indigo-400 hover:text-indigo-300">
+                    Sign In
+                </a>
+            </p>
+
+        </form>
     </div>
 
 </body>

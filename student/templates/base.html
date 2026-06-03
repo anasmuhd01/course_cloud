@@ -58,25 +58,39 @@
                         Home
                     </a>
 
-                    <a href="#"
+                    <a href="{% url 'wishlistall' %}"
                         class="px-4 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-gray-700 transition">
-                        <i class="fa-solid fa-heart mr-2"></i>
+
+                        <span class="relative inline-block mr-2">
+                            <i class="fa-solid fa-heart"></i>
+
+                            {% if wishlist_count %}
+                            <span
+                                class="absolute -top-2 -right-2 bg-red-500 text-white text-xs min-w-[18px] h-[18px] rounded-full flex items-center justify-center">
+                                {{ wishlist_count }}
+                            </span>
+                            {% endif %}
+                        </span>
+
                         Wishlist
                     </a>
 
-                    <a href="{% url 'cartlist' %}"
-                        class="relative px-4 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-gray-700 transition">
+                    </a>
 
-                        <i class="fa-solid fa-cart-shopping mr-2"></i>
-                        Cart
-
-                        {% if cart_count %}
-                        <span
-                            class="absolute -top-1 -right-1 bg-red-500 text-white text-xs min-w-[20px] h-5 px-1 flex items-center justify-center rounded-full font-bold">
-                            {{cart_count}}
+                    <a href="{% url 'cartlist' %}" class="px-4 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-gray-700 transition">
+                    
+                        <span class="relative inline-block mr-2">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                    
+                            {% if cart_count %}
+                            <span
+                                class="absolute -top-2 -right-2 bg-red-500 text-white text-xs min-w-[18px] h-[18px] rounded-full flex items-center justify-center">
+                                {{ cart_count }}
+                            </span>
+                            {% endif %}
                         </span>
-                        {% endif %}
-
+                    
+                        Cart
                     </a>
 
                     <a href="#"

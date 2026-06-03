@@ -7,7 +7,7 @@ from django.contrib.auth import login,authenticate,logout
 from django.http import HttpResponse
 from django.contrib import messages
 from instrctor.models import Course
-from student.models import Cart,Course
+from student.models import Cart,Course,Wishlist
 
 
 # django generic views
@@ -94,3 +94,30 @@ class DeleteCartItemView(View):
         cid = kwargs.get('id')
         Cart.objects.get(id=cid).delete()
         return redirect('cartlist')
+    
+
+class WishlistView(View):
+    def get(self,req,**kwargs):
+
+        id = kwargs.get('id')
+        course = Course.objects.get(id=id)
+        student = req.user
+        (object,created) = Wishlist.objects.get_or_create(course_object = course,student_object = student)
+        
+        if created:
+            return redirect('cchome')
+        else:
+            messages.warning(req,'In Wishlist')
+            return redirect('cchome')
+        
+class WishlistAllView(View):
+    def get(self,req):
+        print(Wishlist.objects.filter(student_object=req.user).count())
+        data = Wishlist.objects.filter(student_object = req.user)
+        return render(req,'wishlist.html',{'wishlist':data})
+    
+class DeleteWishlistView(View):
+    def get(self,req,**kwargs):
+        id = kwargs.get('id')
+        Wishlist.objects.get(id=id).delete()
+        return redirect('wishlistall')

@@ -8,5 +8,8 @@ urlpatterns = [
     path('coursedetails/<int:cid>',CourseDetailsView.as_view(),name='course_details'),
     path('cart/<int:id>',AddtoCart.as_view(),name="addtocart"),
     path('cartlist',CartlistView.as_view(),name="cartlist"),
-    path('deleteitem/<int:id>',DeleteCartItemView.as_view(),name="dltcartitm")
+    path('deleteitem/<int:id>',DeleteCartItemView.as_view(),name="dltcartitm"),
+    path('wishlist/<int:id>',WishlistView.as_view(),name="wishlist"),
+    path('wishlistall',WishlistAllView.as_view(),name='wishlistall'),
+    path('dltwlst/<int:id>',DeleteWishlistView.as_view(),name="dltwlst"),
 ]
