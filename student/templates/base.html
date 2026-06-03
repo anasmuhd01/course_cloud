@@ -173,6 +173,7 @@
         </div>
 
     </nav>
+    <!-- footer  -->
     <div style="min-height: 70vh;">
         {% block base %}
 
@@ -180,26 +181,178 @@
 
         {% endblock base %}
     </div>
-    <div class="w-full  p-4 bg-gray-800 text-white">
-        <div class="grid grid-cols-2">
-            <div>
-                <h4>
-                    <i class="fa-regular fa-cloud " style="color: rgb(99, 230, 190);"></i>
-                    course_cloud
-                </h4>
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Eos delectus illum esse autem sunt tenetur
-                    sit, excepturi dolores rem impedit minus facilis repudiandae dolore, ab ipsum dolor cupiditate modi
-                    nulla?
-                </p>
+    <footer class="bg-gray-800 text-gray-300">
+
+
+        <div class="max-w-7xl mx-auto px-6 py-12">
+
+            <div class="grid md:grid-cols-4 gap-10">
+
+                <!-- Brand -->
+                <div>
+
+                    <div class="flex items-center gap-3 mb-4">
+
+                        <i class="fa-solid fa-cloud text-cyan-400 text-3xl"></i>
+
+                        <h3 class="text-2xl font-bold text-white">
+                            Course Cloud
+                        </h3>
+
+                    </div>
+
+                    <p class="text-gray-400 leading-relaxed">
+                        Learn modern technologies, programming, AI, web development,
+                        cloud computing and much more through practical,
+                        industry-focused courses.
+                    </p>
+
+                    <div class="flex gap-4 mt-5 text-xl">
+
+                        <a href="#" class="hover:text-cyan-400 transition">
+                            <i class="fa-brands fa-facebook"></i>
+                        </a>
+
+                        <a href="#" class="hover:text-cyan-400 transition">
+                            <i class="fa-brands fa-instagram"></i>
+                        </a>
+
+                        <a href="#" class="hover:text-cyan-400 transition">
+                            <i class="fa-brands fa-linkedin"></i>
+                        </a>
+
+                        <a href="#" class="hover:text-cyan-400 transition">
+                            <i class="fa-brands fa-github"></i>
+                        </a>
+
+                    </div>
+
+                </div>
+
+                <!-- Quick Links -->
+                <div>
+
+                    <h4 class="text-white text-lg font-semibold mb-4">
+                        Quick Links
+                    </h4>
+
+                    <ul class="space-y-3">
+
+                        <li>
+                            <a href="{% url 'cchome' %}" class="hover:text-cyan-400 transition">
+                                Home
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="hover:text-cyan-400 transition">
+                                Wishlist
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="{% url 'cartlist' %}" class="hover:text-cyan-400 transition">
+                                Cart
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="#" class="hover:text-cyan-400 transition">
+                                My Courses
+                            </a>
+                        </li>
+
+                    </ul>
+
+                </div>
+
+                <!-- Contact -->
+                <div>
+
+                    <h4 class="text-white text-lg font-semibold mb-4">
+                        Contact
+                    </h4>
+
+                    <div class="space-y-3">
+
+                        <p>
+                            <i class="fa-solid fa-envelope text-cyan-400 mr-2"></i>
+                            support@coursecloud.com
+                        </p>
+
+                        <p>
+                            <i class="fa-solid fa-phone text-cyan-400 mr-2"></i>
+                            +91 9090909090
+                        </p>
+
+                        <p>
+                            <i class="fa-solid fa-location-dot text-cyan-400 mr-2"></i>
+                            Kerala, India
+                        </p>
+
+                    </div>
+
+                </div>
+
+                <!-- Feedback -->
+                <div>
+
+                    <h4 class="text-white text-lg font-semibold mb-4">
+                        Feedback
+                    </h4>
+
+                    <form>
+
+                        <textarea rows="4" placeholder="Share your feedback..."
+                            class="w-full rounded-xl bg-gray-700 border border-gray-600 p-3 text-white focus:outline-none focus:ring-2 focus:ring-cyan-400 resize-none"></textarea>
+
+                        <button
+                            class="w-full mt-3 bg-cyan-500 hover:bg-cyan-600 text-white py-3 rounded-xl font-semibold transition">
+
+                            Send Feedback
+
+                        </button>
+
+                    </form>
+
+                </div>
+
             </div>
-            <div class="p-2">
-                <h4>feedback</h4>
-                <textarea name="" id="" class="w-full bg-white border rounded my-2"></textarea>
-                <button class="bg-green-700 text-white my-2 p-2 rounded">Send</button>
+
+            <!-- Bottom Footer -->
+            <div class="border-t border-gray-700 mt-10 pt-6">
+
+                <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+
+                    <p class="text-sm text-gray-400">
+                        © 2026 Course Cloud. All rights reserved.
+                    </p>
+
+                    <div class="flex gap-6 text-sm">
+
+                        <a href="#" class="hover:text-cyan-400 transition">
+                            Privacy Policy
+                        </a>
+
+                        <a href="#" class="hover:text-cyan-400 transition">
+                            Terms & Conditions
+                        </a>
+
+                        <a href="#" class="hover:text-cyan-400 transition">
+                            Support
+                        </a>
+
+                    </div>
+
+                </div>
+
             </div>
+
         </div>
-        <h6 class="text-center font-bold">CourseCloud 2026 &copy; All rights reserved</h6>
-    </div>
+
+
+    </footer>
+
 </body>
 
 </html>

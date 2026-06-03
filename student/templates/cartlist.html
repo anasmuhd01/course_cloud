@@ -1,90 +1,180 @@
 {% extends 'base.html' %}
 {% block base %}
 
-<div class="relative overflow-x-auto bg-neutral-primary-soft shadow-xs rounded rounded-base border border-default">
-    {%if data %}
-    <table class="w-full text-sm text-left rtl:text-right text-body">
-        <thead class="text-sm text-body bg-neutral-secondary-soft border-b rounded-base border-default">
-            <tr>
-                <th scope="col" class="px-6 py-3 font-medium">
-                    SN:
-                </th>
-                <th scope="col" class="px-6 py-3 font-medium">
-                    Course name
-                </th>
+{% if data %}
 
-                <th scope="col" class="px-6 py-3 font-medium">
-                    Image
-                </th>
-                <th scope="col" class="px-6 py-3 font-medium">
-                    Added at
-                </th>
-                <th scope="col" class="px-6 py-3 font-medium">
-                    Price
-                </th>
-                <th scope="col" class="px-6 py-3 font-medium">
+<div class="max-w-7xl mx-auto px-4 py-10">
 
-                </th>
-            </tr>
-        </thead>
-        <tbody>
+    <!-- Heading -->
+    <div class="mb-10">
+
+        <span class="text-blue-600 font-semibold uppercase tracking-wider">
+            Shopping Cart
+        </span>
+
+        <h1 class="text-5xl font-bold mt-2">
+            Your Cart
+        </h1>
+
+        <p class="text-gray-500 mt-2">
+            Review your selected courses before checkout.
+        </p>
+
+    </div>
+
+    <div class="grid lg:grid-cols-3 gap-8">
+
+        <!-- Cart Items -->
+        <div class="lg:col-span-2 space-y-6">
 
             {% for i in data %}
-            <tr class="bg-neutral-primary border-b border-default">
-                <th scope="row" class="px-6 py-4 font-medium text-heading whitespace-nowrap">
-                    {{forloop.counter}}
-                </th>
-                <td class="px-6 py-4">
-                    {{i.course_object.title}}
-                </td>
-                <td class="px-6 py-4">
-                    <img src="{{i.course_object.course_picture.url}}" alt="no preview" width="200px">
 
-                </td>
-                <td class="px-6 py-4">
-                    {{i.added_at}}
-                </td>
-                <td class="px-6 py-4">
-                    {{i.course_object.price}}
-                </td>
-                <td class="px-6 py-4">
-                    <a href="{% url 'dltcartitm' i.id %}">
-                        <i class="fa-solid fa-trash" style="color: rgb(210, 23, 23);"></i>
+            <div class="bg-white rounded-3xl shadow-lg hover:shadow-xl transition p-5">
 
-                    </a>
-                </td>
-            </tr>
+                <div class="flex flex-col md:flex-row gap-5">
+
+                    <!-- Image -->
+                    <img src="{{i.course_object.course_picture.url}}" alt="{{i.course_object.title}}"
+                        class="w-full md:w-60 h-40 object-cover rounded-2xl">
+
+                    <!-- Details -->
+                    <div class="flex-1 flex flex-col justify-between">
+
+                        <div>
+
+                            <h2 class="text-2xl font-bold text-gray-800">
+                                {{i.course_object.title}}
+                            </h2>
+
+                            <p class="text-gray-500 mt-2">
+                                Added on {{i.added_at}}
+                            </p>
+
+                        </div>
+
+                        <div class="flex justify-between items-center mt-6">
+
+                            <span class="text-2xl font-bold text-blue-600">
+
+                                ₹{{i.course_object.price}}
+
+                            </span>
+
+                            <a href="{% url 'dltcartitm' i.id %}"
+                                class="bg-red-50 text-red-600 px-4 py-2 rounded-xl hover:bg-red-100 transition">
+
+                                <i class="fa-solid fa-trash mr-2"></i>
+                                Remove
+
+                            </a>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
             {% endfor %}
 
+        </div>
 
-        </tbody>
-    </table>
-</div>
+        <!-- Summary Card -->
+        <div>
 
+            <div class="bg-white rounded-3xl shadow-lg p-8 sticky top-24">
 
+                <h2 class="text-2xl font-bold mb-6">
+                    Order Summary
+                </h2>
 
-<div class="border-3 border-grey-700 rounded p-1 mt-4">
-    <div class="flex flex-col gap-2">
-        <h1>Total Course : <span>{{count}}</span></h1>
-        <h1>Total Price : <span>{{price}}</span></h1>
-        <a href=""
-            class="bg-gray-800 text-white text-xl w-full block text-center border border-black shadow-2xl rounded">
-            checkout
-        </a>
+                <div class="space-y-4">
+
+                    <div class="flex justify-between">
+
+                        <span class="text-gray-600">
+                            Total Courses
+                        </span>
+
+                        <span class="font-semibold">
+                            {{count}}
+                        </span>
+
+                    </div>
+
+                    <div class="flex justify-between">
+
+                        <span class="text-gray-600">
+                            Subtotal
+                        </span>
+
+                        <span class="font-semibold">
+                            ₹{{price}}
+                        </span>
+
+                    </div>
+
+                    <div class="border-t pt-4 flex justify-between">
+
+                        <span class="font-bold text-lg">
+                            Total
+                        </span>
+
+                        <span class="font-bold text-2xl text-blue-600">
+                            ₹{{price}}
+                        </span>
+
+                    </div>
+
+                </div>
+
+                <a href=""
+                    class="mt-8 block w-full text-center bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-4 rounded-2xl font-semibold text-lg hover:from-blue-700 hover:to-indigo-700 transition">
+
+                    <i class="fa-solid fa-credit-card mr-2"></i>
+                    Proceed to Checkout
+
+                </a>
+
+                <a href="{% url 'cchome' %}"
+                    class="mt-4 block text-center border border-gray-300 py-3 rounded-2xl hover:bg-gray-50 transition">
+
+                    Continue Shopping
+
+                </a>
+
+            </div>
+
+        </div>
+
     </div>
 
 </div>
 
 {% else %}
-<div class="min-h-[80vh] flex flex-col items-center justify-center gap-4">
-    <img src="https://www.krosfitsports.com/public/empty-cart.gif" alt="Empty Cart" class="w-96 max-w-full">
 
-    <h2 class="text-2xl font-bold">
+<div class="min-h-[80vh] flex flex-col items-center justify-center px-4">
+
+    <img src="https://www.krosfitsports.com/public/empty-cart.gif" alt="Empty Cart" class="w-80 md:w-96">
+
+    <h2 class="text-4xl font-bold mt-6">
         Your Cart is Empty
     </h2>
 
-    
+    <p class="text-gray-500 mt-3">
+        Browse our courses and start learning today.
+    </p>
+
+    <a href="{% url 'cchome' %}"
+        class="mt-6 bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-xl font-semibold transition">
+
+        Explore Courses
+
+    </a>
+
 </div>
+
 {% endif %}
 
 {% endblock base %}
