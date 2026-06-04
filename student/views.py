@@ -7,7 +7,14 @@ from django.contrib.auth import login,authenticate,logout
 from django.http import HttpResponse
 from django.contrib import messages
 from instrctor.models import Course
-from student.models import Cart,Course,Wishlist
+from student.models import Cart,Course,Wishlist,Order
+import razorpay
+from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt
+
+# Razorpay keys 
+RAZORPAY_KEY = "rzp_test_SxQtLPRLPQ08jd"
+RAZORPAY_SECRET_KEY = "9Xk2z1fJQVK7X4MyVVxQVXO1"
 
 
 # django generic views
@@ -121,3 +128,68 @@ class DeleteWishlistView(View):
         id = kwargs.get('id')
         Wishlist.objects.get(id=id).delete()
         return redirect('wishlistall')
+    
+
+class PlaceOrderView(View):
+    def get(self,req):
+        student = req.user
+        qs = Cart.objects.filter(student_object = student)
+        
+        cart_total = 0
+        for i in qs:
+            cart_total += i.course_object.price
+        order = Order.objects.create(student_object = student,total =cart_total)
+        for i in qs:
+            order.course_object.add(i.course_object)
+        qs.delete()
+
+        if cart_total > 0:
+            print('payment gateway')
+            client = razorpay.Client(auth=(RAZORPAY_KEY, RAZORPAY_SECRET_KEY))
+
+            data = { "amount": int(cart_total), "currency": "INR", "receipt": "order_rcptid_11" }
+            payment = client.order.create(data=data) 
+            print(payment)
+            order.razr_pay_id = payment.get('id')
+            order.save()
+            context = {
+                'razor_pay_key':RAZORPAY_KEY,
+                'amount':int(cart_total),
+                'razr_pay_id':payment.get('id')
+            }
+            return render(req,'payment.html',{'data':context})
+
+
+        elif cart_total == 0 :
+            order.is_paid = True
+            order.save()
+            return redirect('cchome')
+
+        else:
+            return redirect('cchome')
+        
+@method_decorator(csrf_exempt,name="dispatch")
+class Paymentview(View):
+    def post(self,req):
+        print(req.POST)
+        print(req.POST.get('razorpay_order_id'))
+        client = razorpay.Client(auth=(RAZORPAY_KEY, RAZORPAY_SECRET_KEY))
+        try:
+            client.utility.verify_payment_signature(req.POST)
+            razr_pay_id = req.POST.get('razorpay_order_id')  
+            order = Order.objects.get(razr_pay_id=razr_pay_id)
+            order.is_paid = True
+            order.save()
+        except:
+            print('Failed')
+
+        return redirect('cchome')
+    
+
+class MycourseView(View):
+    def get(self,req):
+        order_qs = Order.objects.filter(is_paid=True,student_object=req.user)
+        return render(req,'mycourse.html',{'dat':order_qs})
+
+
+        

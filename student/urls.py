@@ -12,4 +12,6 @@ urlpatterns = [
     path('wishlist/<int:id>',WishlistView.as_view(),name="wishlist"),
     path('wishlistall',WishlistAllView.as_view(),name='wishlistall'),
     path('dltwlst/<int:id>',DeleteWishlistView.as_view(),name="dltwlst"),
+    path('payment',PlaceOrderView.as_view(),name='placeorder'),
+    path('paymentverify',Paymentview.as_view(),name='paysuccess'),
 ]
