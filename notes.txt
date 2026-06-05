@@ -83,3 +83,8 @@ TEMPLATES = [
 
 path parameter - <>
 Query parameter - ?
+
+Django Never cache - used to remove cache stored in a session
+environment variable & decouple
+
+decouple- pip install python-decouple

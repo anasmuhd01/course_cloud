@@ -11,10 +11,12 @@ from student.models import Cart,Course,Wishlist,Order
 import razorpay
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.cache import never_cache
+from decouple import config
 
 # Razorpay keys 
-RAZORPAY_KEY = "rzp_test_SxQtLPRLPQ08jd"
-RAZORPAY_SECRET_KEY = "9Xk2z1fJQVK7X4MyVVxQVXO1"
+RAZORPAY_KEY = config('RAZORPAY_KEY')
+RAZORPAY_SECRET_KEY = config('RAZORPAY_SECRET_KEY')
 
 
 #sigin-decorator 
@@ -36,7 +38,7 @@ class SignupView(CreateView):
     #     return redirect('signin')
 
 
-@method_decorator(signin_required,name='dispatch')
+@method_decorator([signin_required,never_cache],name='dispatch')
 class CCHomeView(ListView):
     template_name = 'homepage.html'
     queryset = Course.objects.all()
@@ -81,14 +83,14 @@ class LogoutView(View):
         logout(req)
         return redirect('signin')
 
-@method_decorator(signin_required,name='dispatch')
+@method_decorator([signin_required,never_cache],name='dispatch')
 class CourseDetailsView(DetailView):
     template_name = 'coursedetails.html'
     queryset = Course.objects.all()
     pk_url_kwarg = 'cid'
     context_object_name = 'course'
 
-@method_decorator(signin_required,name='dispatch')
+@method_decorator([signin_required,never_cache],name='dispatch')
 class AddtoCart(View):
     def get(self,req,**kwargs):
         id = kwargs.get('id')
@@ -102,7 +104,7 @@ class AddtoCart(View):
             return redirect('cchome')
         
 
-@method_decorator(signin_required,name='dispatch')
+@method_decorator([signin_required,never_cache],name='dispatch')
 class CartlistView(View):
     def get(self,req):
         cartlist = Cart.objects.filter(student_object = req.user)
@@ -112,14 +114,14 @@ class CartlistView(View):
             total += i.course_object.price
         return render(req,'cartlist.html',{'data':cartlist,'count':cart_count,'price':total})
 
-@method_decorator(signin_required,name='dispatch')  
+@method_decorator([signin_required,never_cache],name='dispatch')  
 class DeleteCartItemView(View):
     def get(self,req,**kwargs):
         cid = kwargs.get('id')
         Cart.objects.get(id=cid).delete()
         return redirect('cartlist')
     
-@method_decorator(signin_required,name='dispatch')
+@method_decorator([signin_required,never_cache],name='dispatch')
 class WishlistView(View):
     def get(self,req,**kwargs):
 
@@ -134,21 +136,21 @@ class WishlistView(View):
             messages.warning(req,'In Wishlist')
             return redirect('cchome')
 
-@method_decorator(signin_required,name='dispatch')       
+@method_decorator([signin_required,never_cache],name='dispatch')       
 class WishlistAllView(View):
     def get(self,req):
         print(Wishlist.objects.filter(student_object=req.user).count())
         data = Wishlist.objects.filter(student_object = req.user)
         return render(req,'wishlist.html',{'wishlist':data})
 
-@method_decorator(signin_required,name='dispatch')
+@method_decorator([signin_required,never_cache],name='dispatch')
 class DeleteWishlistView(View):
     def get(self,req,**kwargs):
         id = kwargs.get('id')
         Wishlist.objects.get(id=id).delete()
         return redirect('wishlistall')
     
-@method_decorator(signin_required,name='dispatch')
+@method_decorator([signin_required,never_cache],name='dispatch')
 class PlaceOrderView(View):
     def get(self,req):
         student = req.user
@@ -187,7 +189,7 @@ class PlaceOrderView(View):
         else:
             return redirect('cchome')
         
-@method_decorator([csrf_exempt,signin_required],name="dispatch")
+@method_decorator([csrf_exempt],name="dispatch")
 class Paymentview(View):
     def post(self,req):
         print(req.POST)
@@ -204,13 +206,13 @@ class Paymentview(View):
 
         return redirect('cchome')
     
-@method_decorator(signin_required,name='dispatch')
+@method_decorator([signin_required,never_cache],name='dispatch')
 class MycourseView(View):
     def get(self,req):
         order_qs = Order.objects.filter(is_paid=True,student_object=req.user)
         return render(req,'mycourse.html',{'data':order_qs})
 
-@method_decorator(signin_required,name='dispatch')
+@method_decorator([signin_required,never_cache],name='dispatch')
 class LessonView(View):
     def get(self,req,**kwargs):
         # print(kwargs.get('id'))
