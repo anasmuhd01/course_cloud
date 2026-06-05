@@ -77,11 +77,12 @@
 
                     </a>
 
-                    <a href="{% url 'cartlist' %}" class="px-4 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-gray-700 transition">
-                    
+                    <a href="{% url 'cartlist' %}"
+                        class="px-4 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-gray-700 transition">
+
                         <span class="relative inline-block mr-2">
                             <i class="fa-solid fa-cart-shopping"></i>
-                    
+
                             {% if cart_count %}
                             <span
                                 class="absolute -top-2 -right-2 bg-red-500 text-white text-xs min-w-[18px] h-[18px] rounded-full flex items-center justify-center">
@@ -89,15 +90,15 @@
                             </span>
                             {% endif %}
                         </span>
-                    
+
                         Cart
                     </a>
 
-                    <a href="#"
+                    <a href="{% url 'mycourse' %}"
                         class="px-4 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-gray-700 transition">
 
                         <i class="fa-solid fa-graduation-cap mr-2"></i>
-                        My Courses
+                        My Courses <span>{{total_order}}</span>{{total_order}}
 
                     </a>
 

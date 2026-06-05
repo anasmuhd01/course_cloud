@@ -14,4 +14,6 @@ urlpatterns = [
     path('dltwlst/<int:id>',DeleteWishlistView.as_view(),name="dltwlst"),
     path('payment',PlaceOrderView.as_view(),name='placeorder'),
     path('paymentverify',Paymentview.as_view(),name='paysuccess'),
+    path('mycourse',MycourseView.as_view(),name='mycourse'),
+    path('viewlesson/<int:id>',LessonView.as_view(),name='viewlesson')
 ]

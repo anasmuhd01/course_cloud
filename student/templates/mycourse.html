@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block base %}
+
+
+<div class="p-3">
+    {% for order in data %}
+    {% for course in order.course_object.all %}
+    <div class="max-w-sm rounded overflow-hidden shadow-lg p-3">
+        <img class="w-full" src="{{course.course_picture.url}}" alt="Sunset in the mountains">
+        <div class="px-6 py-4">
+            <div class="font-bold text-xl mb-2">{{course.title}}</div>
+            <p class="text-gray-700 text-base">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Voluptatibus quia, nulla! Maiores et
+                perferendis
+                eaque, exercitationem praesentium nihil.
+            </p>
+        </div>
+        <div class="px-6 pt-4 pb-2">
+            <a href="{% url 'viewlesson' course.id %}"
+                class="text-white bg-blue-600 rounded-2xl box-border border border-transparent hover:bg-brand-strong focus:ring-4 focus:ring-brand-medium shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none">
+                startcourse {{course.id}}
+            </a>
+
+
+        </div>
+    </div>
+    {% endfor %}
+    {% endfor %}
+</div>
+
+
+{% endblock base %}

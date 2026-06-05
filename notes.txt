@@ -80,3 +80,6 @@ TEMPLATES = [
         },
     },
 ]
+
+path parameter - <>
+Query parameter - ?
