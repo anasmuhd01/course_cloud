@@ -169,7 +169,7 @@ class PlaceOrderView(View):
             print('payment gateway')
             client = razorpay.Client(auth=(RAZORPAY_KEY, RAZORPAY_SECRET_KEY))
 
-            data = { "amount": int(cart_total), "currency": "INR", "receipt": "order_rcptid_11" }
+            data = { "amount": int(cart_total)*100, "currency": "INR", "receipt": "order_rcptid_11" }
             payment = client.order.create(data=data) 
             print(payment)
             order.razr_pay_id = payment.get('id')
@@ -179,6 +179,8 @@ class PlaceOrderView(View):
                 'amount':int(cart_total),
                 'razr_pay_id':payment.get('id')
             }
+            print("cart_total =", cart_total)
+            print(payment)
             return render(req,'payment.html',{'data':context})
 
 
