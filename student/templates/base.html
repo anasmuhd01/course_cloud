@@ -98,7 +98,10 @@
                         class="px-4 py-2 rounded-lg text-gray-300 hover:text-white hover:bg-gray-700 transition">
 
                         <i class="fa-solid fa-graduation-cap mr-2"></i>
-                        My Courses <span>{{total_order}}</span>
+                        My Courses
+                        {% if total_order %}
+                        <span>{{total_order}}</span>
+                        {% endif %}
 
                     </a>
 
