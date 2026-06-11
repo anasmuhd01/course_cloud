@@ -10,6 +10,7 @@ from instrctor.models import Course,Lesson,Module
 from student.models import Cart,Course,Wishlist,Order
 import razorpay
 from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.cache import never_cache
 from decouple import config
@@ -22,11 +23,11 @@ RAZORPAY_SECRET_KEY = config('RAZORPAY_SECRET_KEY')
 #sigin-decorator 
 def signin_required(fn):
     def inner(req,*args,**kwargs):
-        if req.user.is_authenitcated:
-            return fn
+        if req.user.is_authenticated:
+            return fn(req,*args,**kwargs)
         else:
             return redirect('signin')
-    return fn
+    return inner
 
 # django generic views
 class SignupView(CreateView):
@@ -136,7 +137,7 @@ class WishlistView(View):
             messages.warning(req,'In Wishlist')
             return redirect('cchome')
 
-@method_decorator([signin_required,never_cache],name='dispatch')       
+# @method_decorator([signin_required,never_cache],name='dispatch')       
 class WishlistAllView(View):
     def get(self,req):
         print(Wishlist.objects.filter(student_object=req.user).count())
