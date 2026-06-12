@@ -39,7 +39,7 @@ class SignupView(CreateView):
     #     return redirect('signin')
 
 
-@method_decorator([signin_required,never_cache],name='dispatch')
+@method_decorator([never_cache],name='dispatch')
 class CCHomeView(ListView):
     template_name = 'homepage.html'
     queryset = Course.objects.all()

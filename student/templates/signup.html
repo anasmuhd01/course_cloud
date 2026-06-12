@@ -49,9 +49,11 @@
                 <input type="text" name="username" placeholder="Username"
                     class="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-white placeholder-gray-500 outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30" />
 
+                {% for error in form.username.errors %}
                 <p class="mt-1 text-sm text-red-400">
-                    {{ form.username.errors }}
+                    {{ error }}
                 </p>
+                {% endfor %}
             </div>
 
             <!-- Email -->
@@ -71,9 +73,11 @@
                 <input type="password" name="password2" placeholder="Confirm Password" required
                     class="w-full rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-white placeholder-gray-500 outline-none transition focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/30" />
 
+                {% for error in form.password2.errors %}
                 <p class="mt-1 text-sm text-red-400">
-                    {{ form.password2.errors }}
+                    {{ error }}
                 </p>
+                {% endfor %}
             </div>
 
             <!-- Submit Button -->
